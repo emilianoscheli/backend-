@@ -1,0 +1,80 @@
+/*
+const getMenuFrontEnd = (role = 'USER_ROLE') => {
+
+  const menu = [
+      {
+        titulo: 'Dashboard',
+        icono: 'mdi mdi-gauge',
+        submenu: [
+          { titulo: 'Cargar de estudio', url: 'Cargar-estudio' },
+          { titulo: 'Cargar paciente', url: 'Cargar-paciente' },
+
+         
+    
+        ]
+      },
+  
+      {
+        titulo: 'Mantenimientos',
+        icono: 'mdi mdi-folder-lock-open',
+        submenu: [
+          // { titulo: 'Usuarios', url: 'usuarios' },
+          //{ titulo: 'Hospitales', url: 'hospitales' },
+          //{ titulo: 'Médicos', url: 'medicos' },
+          { titulo: 'Cargar paciente', url: 'cargar-datos' },
+      //    { titulo: 'filee', url: 'filee' },
+
+
+        ]
+      },
+    ];
+
+  if ( role === 'ADMIN_ROLE' ) {
+      menu[1].submenu.unshift({ titulo: 'Estudios', url: 'usuarios' })
+      //menu[2].submenu.unshift({  titulo: 'Mis estudios', url: 'estudios' })
+
+  }
+
+  return menu;
+}
+
+module.exports = {
+  getMenuFrontEnd
+}
+*/
+
+
+const getMenuFrontEnd = (role = 'USER_ROLE') => {
+
+  const menu = [
+      {
+        titulo: 'Dashboard',
+        icono: 'mdi mdi-gauge',
+        submenu: [       
+          { titulo: 'Mis estudios GUARD', url: 'estudios' },
+        ]
+      },
+  
+      {
+        titulo: 'Acciones',
+        icono: 'mdi mdi-folder-lock-open',
+        submenu: [
+
+
+        ]
+      },
+    ];
+
+  if ( role === 'ADMIN_ROLE' ) {
+      menu[1].submenu.unshift({ titulo: 'Usuarios', url: 'usuarios' }),
+            menu[1].submenu.unshift({  titulo: 'Cargar de estudio', url: 'Cargar-estudio' }),
+            menu[1].submenu.unshift({  titulo: 'Cargar persona', url: 'Cargar-paciente' })
+
+  }
+
+  return menu;
+}
+
+module.exports = {
+  getMenuFrontEnd
+}
