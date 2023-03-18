@@ -6,7 +6,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const Usuario = require('../models/estudio');
 const { generarJWT } = require('../helpers/jwt');
-const { EvStation } = require('@material-ui/icons');
 const Estudio = require('../models/estudio');
 const fs = require('fs');
 const pdf = require('html-pdf');
