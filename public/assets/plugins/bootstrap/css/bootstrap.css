@@ -4661,6 +4661,8 @@ button.close {
       justify-content: space-between;
   padding: 15px;
   border-bottom: 1px solid #e9ecef;
+  color:#FFF;
+
 }
 
 .modal-title {
