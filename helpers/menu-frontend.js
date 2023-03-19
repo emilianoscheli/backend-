@@ -51,7 +51,6 @@ const getMenuFrontEnd = (role = 'USER_ROLE') => {
         titulo: 'Dashboard',
         icono: 'mdi mdi-gauge',
         submenu: [       
-          { titulo: 'Mis estudios GUARD', url: 'estudios' },
         ]
       },
   
@@ -66,9 +65,10 @@ const getMenuFrontEnd = (role = 'USER_ROLE') => {
     ];
 
   if ( role === 'ADMIN_ROLE' ) {
-      menu[1].submenu.unshift({ titulo: 'Usuarios', url: 'usuarios' }),
-            menu[1].submenu.unshift({  titulo: 'Cargar de estudio', url: 'Cargar-estudio' }),
-            menu[1].submenu.unshift({  titulo: 'Cargar persona', url: 'Cargar-paciente' })
+            menu[1].submenu.unshift({  titulo: 'Cargar estudio', url: 'Cargar-estudio' }),
+            menu[1].submenu.unshift({  titulo: 'Cargar persona', url: 'Cargar-paciente' }),
+                  menu[1].submenu.unshift({ titulo: 'Mis estudios', url: 'estudios' })
+
 
   }
 

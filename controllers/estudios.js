@@ -46,7 +46,7 @@ const getEstudios = async(req, res) => {
         Estudio
             .find({dni})
             .skip( desde )
-            .limit( 6),
+            .limit( 99),
 
         Estudio.countDocuments()
     ]);
@@ -59,6 +59,28 @@ const getEstudios = async(req, res) => {
     });
 
 }
+const getEstudios2 = async(req, res) => {
+
+    const desde = Number(req.query.desde) || 0;
+    const dni2 = req.params.dni;
+    const [ estudios, total ] = await Promise.all([
+        Estudio
+            .find({dni2})
+            .skip( desde )
+            .limit( 99),
+
+        Estudio.countDocuments()
+    ]);
+
+
+    res.json({
+        ok: true,
+        estudios,
+        total
+    });
+
+}
+
 
 const getEstudioByDni = async(req, res = response) => {
 /*
@@ -334,5 +356,6 @@ module.exports = {
     getEstudios,
     crearEstudio,
     actualizarEstudio,
-    borrarEstudio
+    borrarEstudio,
+    getEstudios2
 }

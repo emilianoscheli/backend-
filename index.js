@@ -30,6 +30,8 @@ app.use( '/api/todo', require('./routes/busquedas') );
 app.use( '/api/login', require('./routes/auth') );
 app.use( '/api/upload', require('./routes/uploads') );
 app.use( '/api/Estudios', require('./routes/Estudios') );
+app.use( '/api/Estudios2', require('./routes/Estudios2') );
+
 
 
 // Lo último
