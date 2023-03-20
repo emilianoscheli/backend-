@@ -143,7 +143,7 @@ async function crearEstudio(req, res) {
     //const {  dniPaciente} = req.body;
     const { descripcion, fecha } = req.body;
     // const { descripcion, fecha} = req.body.contacts.contactType;
-    console.log('select option value' + req.body.contacts.contactType);
+  //  console.log('select option value' + req.body.contacts.contactType);
 
     //slet myString = JSON.stringify(req.body, null, 4); // 4 space indentations
     //console.log( 'controller params study'+myString);
@@ -176,7 +176,8 @@ async function crearEstudio(req, res) {
     //  estu.fecha2=obj.fecha;
     //console.log( 'controlasdasdads'+obj.fecha);
     // Guardar usuario
-    await estu.save(req.body.contacts.contactType);
+   // await estu.save(req.body.contacts.contactType);
+   await estu.save();
 
     // Generar el TOKEN - JWT
     //   const token = await generarJWT( usuario.id );
