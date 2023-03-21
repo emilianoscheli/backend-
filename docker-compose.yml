@@ -17,6 +17,10 @@ services:
     restart: always
     ports:
       - '4563:3000'
+    environment:
+      VIRTUAL_HOST: ${DOMAIN}
+      LETSENCRYPT_HOST: ${DOMAIN}
+      LETSENCRYPT_EMAIL: arianvaldivieso@gmail.com
   adminer:
     image: adminer
     restart: always
