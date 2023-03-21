@@ -1,0 +1,68 @@
+version: "3.3"
+services:
+  app:
+    build: .
+    volumes:
+      - './:/app'
+    image: emiliano/app
+    networks:
+      - proxy
+    deploy:
+      replicas: 1
+      mode: replicated
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        window: 120s
+    restart: always
+    ports:
+      - '4563:3000'
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 4000:8080
+    networks:
+      - proxy
+  
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    restart: always
+    container_name: proxy-mensore
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - static:/app/app/static/
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    networks:
+      - proxy
+  letsencrypt:
+    restart: always
+    container_name: letsencrypt-mensore
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+    networks:
+      - proxy
+
+
+networks:
+  proxy:
+    external: true
+volumes:
+  html:
+  certs:
+  vhost:
+  static:
