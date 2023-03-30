@@ -10,6 +10,9 @@ const { EvStation } = require('@material-ui/icons');
 const Estudio = require('../models/estudio');
 const fs = require('fs');
 const pdf = require('html-pdf');
+const mongoosePaginate = require('mongoose-paginate-v2');
+const estudio = require('../models/estudio');
+
 /*
 const getEstudios = async(req, res) => {
 
@@ -38,6 +41,8 @@ const getEstudios = async(req, res) => {
 
 }
   */
+
+
 const getEstudios = async(req, res) => {
 
     const desde = Number(req.query.desde) || 0;
@@ -46,12 +51,17 @@ const getEstudios = async(req, res) => {
         Estudio
             .find({dni})
             .skip( desde )
-            .limit( 99),
+            .limit( 5)       ,
+       Estudio.find({dni}).countDocuments()
 
-        Estudio.countDocuments()
+
+        
+
     ]);
 
-
+    //const [ estudios ] = await Estudio.paginate()
+    
+    console.log("El número total de registros es: " + total);
     res.json({
         ok: true,
         estudios,
@@ -141,14 +151,12 @@ const getEstudioByDni = async(req, res = response) => {
 async function crearEstudio(req, res) {
 
     //const {  dniPaciente} = req.body;
-    const { descripcion, fecha } = req.body;
+    const {  fecha } = req.body;
     // const { descripcion, fecha} = req.body.contacts.contactType;
-  //  console.log('select option value' + req.body.contacts.contactType);
 
     //slet myString = JSON.stringify(req.body, null, 4); // 4 space indentations
     //console.log( 'controller params study'+myString);
-    console.log('descripcion' + descripcion);
-    console.log('fecha' + fecha);
+   // console.log('fecha' + fecha);
     const estu = new Estudio(req.body);
 
     //db.estu.save( { month: month, year: year, day: day } )

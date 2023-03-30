@@ -79,7 +79,7 @@ const actualizarImagen = async(tipo, id, nombreArchivo, pdf) => {
            // usuario.img = nombreArchivo;
            // usuario.dni=dni;
             //usuario.ima.push(nombreArchivo);
-            if (pdf==true){
+            if (pdf==true) {
                 estudio.pd.push(nombreArchivo);
 
             }

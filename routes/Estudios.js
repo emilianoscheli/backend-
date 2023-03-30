@@ -14,7 +14,8 @@ const {
 
 
 const router = Router();
-
+router.get( '/' , getEstudios );
+//router.get('/coleccion/:tabla/:busqueda'
 
 //router.get( '/:dni' , getEstudios );
 router.get( '/:dni' , getEstudios );

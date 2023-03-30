@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
-const { actualizarImagen, insertCoin } = require('../helpers/actualizar-imagen');
+const { actualizarImagen} = require('../helpers/actualizar-imagen');
 //import  pdf from 'html-pdf';
 //import fs from 'fs';
 
@@ -11,14 +11,14 @@ const fileUpload = ( req, res = response ) => {
 
     const tipo = req.params.tipo;
     const id   = req.params.id;
-    const dniPaciente   = req.params.dni;
+
 
 
 
     //const dnii = response.get ("dni");
     
     //const dnii =  response.json();
-      console.log('probando el dni del body'+req.body.dni);
+     // console.log('probando el dni del body'+req.body.dni);
 
 
     // Validar tipo
