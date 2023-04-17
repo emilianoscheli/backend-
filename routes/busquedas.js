@@ -5,15 +5,17 @@
 const { Router } = require('express');
 const { validarJWT } = require('../middlewares/validar-jwt')
 
-const { getTodo, getDocumentosColeccion } = require('../controllers/busquedas');
+const { getTodo,getDate, getDocumentosColeccion } = require('../controllers/busquedas');
 
 
 const router = Router();
 
 
-router.get('/:busqueda', validarJWT , getTodo );
+//router.get('/:busqueda', validarJWT , getTodo );
+router.get('/:fechaBuscada/:fechaBuscada2' , getDate );
 
-router.get('/coleccion/:tabla/:busqueda', validarJWT , getDocumentosColeccion );
+
+//router.get('/coleccion/:tabla/:busqueda' , getDocumentosColeccion );
 
 
 

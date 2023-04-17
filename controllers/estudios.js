@@ -42,7 +42,32 @@ const getEstudios = async(req, res) => {
 }
   */
 
+const getEstudioss = async(req, res) => {
 
+    const desde = Number(req.query.desde) || 0;
+    const [ estudios, total ] = await Promise.all([
+        Estudio
+            .find({})
+            .skip( desde )
+            .limit( 5)
+                        ,
+       Estudio.countDocuments()
+
+
+        
+
+    ]);
+
+    //const [ estudios ] = await Estudio.paginate()
+    
+    console.log("El número total de registros es: " + total);
+    res.json({
+        ok: true,
+        estudios,
+        total
+    });
+
+}
 const getEstudios = async(req, res) => {
 
     const desde = Number(req.query.desde) || 0;
@@ -51,7 +76,8 @@ const getEstudios = async(req, res) => {
         Estudio
             .find({dni})
             .skip( desde )
-            .limit( 5)       ,
+            .limit( 5)
+                        ,
        Estudio.find({dni}).countDocuments()
 
 
@@ -69,7 +95,7 @@ const getEstudios = async(req, res) => {
     });
 
 }
-const getEstudios2 = async(req, res) => {
+const getEstudiosx2 = async(req, res) => {
 
     const desde = Number(req.query.desde) || 0;
     const dni2 = req.params.dni;
@@ -77,9 +103,9 @@ const getEstudios2 = async(req, res) => {
         Estudio
             .find({dni2})
             .skip( desde )
-            .limit( 99),
+            .limit( 5),
 
-        Estudio.countDocuments()
+        Estudio.find({dni2}).countDocuments()
     ]);
 
 
@@ -328,21 +354,21 @@ const borrarEstudio = async(req, res = response ) => {
 
     try {
 
-        const usuarioDB = await Usuario.findById( uid );
+        const usuarioDB = await Estudio.findById( uid );
 
         if ( !usuarioDB ) {
             return res.status(404).json({
                 ok: false,
-                msg: 'No existe un usuario por ese id'
+                msg: 'No existe un estudio por ese id'
             });
         }
 
-        await Usuario.findByIdAndDelete( uid );
+        await Estudio.findByIdAndDelete( uid );
 
         
         res.json({
             ok: true,
-            msg: 'Usuario eliminado'
+            msg: 'Estudio eliminado'
         });
 
     } catch (error) {
@@ -366,5 +392,6 @@ module.exports = {
     crearEstudio,
     actualizarEstudio,
     borrarEstudio,
-    getEstudios2
+    getEstudioss,
+    getEstudiosx2
 }
