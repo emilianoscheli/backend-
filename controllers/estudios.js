@@ -79,10 +79,6 @@ const getEstudios = async(req, res) => {
             .limit( 5)
                         ,
        Estudio.find({dni}).countDocuments()
-
-
-        
-
     ]);
 
     //const [ estudios ] = await Estudio.paginate()
