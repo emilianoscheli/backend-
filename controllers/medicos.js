@@ -9,10 +9,58 @@ const getMedicos = async(req, res = response) => {
                                 .populate('hospital','nombre img')
 
 
-    res.json({
+    res.json({ 
         ok: true,
         medicos
     })
+}
+const getDni2 = async(req, res = response) => {
+    const  searchName = req.params.nombre;
+    const  searchLastname = req.params.apellido;
+    
+
+    console.log(searchName);
+    console.log(searchLastname);
+
+    const medico = await  Medico.find({ nombre: searchName, apellido: searchLastname})
+                            
+
+    res.json({ 
+        ok: true,
+        medico
+    })
+}
+const getMedicos2 = async(req, res = response) => {
+
+    const medicos = await Medico.find()
+                           
+
+
+    res.json({ 
+        ok: true,
+        medicos
+    })
+}
+const getDni = async(req, res) => {
+
+
+
+
+    const { nombre} = req.params;
+  
+
+
+
+        const medico = await Medico.findOne({ nombre })
+                
+        res.json({
+            ok: true,
+            medico
+        })
+        console.log('nombreee'+nombre);
+
+        console.log('medicooo'+medico);
+
 }
 
 const getMedicoById = async(req, res = response) => {
@@ -67,6 +115,54 @@ const crearMedico = async (req, res = response) => {
 
 
 }
+const createDoctor = async(req, res = response) => {
+
+    const obj =JSON.stringify(req.body);
+    console.log( 'im on tthe register controler'+obj );
+
+    const { dni } = req.body;
+
+    try {
+
+     //   const existeDni = await Usuario.findOne({ dni });
+/*
+        if ( existeDni ) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'El dni ya está registrado'
+            });
+        }
+        */
+
+        const medico = new Medico( req.body );
+        console.log( 'pasoo' );
+
+    
+    
+        // Guardar usuario
+        await medico.save();
+
+
+
+
+        res.json({
+            ok: true,
+            medico
+            
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Error inesperado... revisar logs'
+        });
+    }
+
+
+}
+
 
 const actualizarMedico = async(req, res = response) => {
     
@@ -146,8 +242,11 @@ const borrarMedico = async (req, res = response) => {
 
 
 module.exports = {
-    getMedicos,
+    getMedicos2,
+    getDni,
+    getDni2,
     crearMedico,
+    createDoctor,
     actualizarMedico,
     borrarMedico,
     getMedicoById

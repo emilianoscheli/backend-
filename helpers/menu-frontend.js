@@ -65,9 +65,12 @@ const getMenuFrontEnd = (role = 'USER_ROLE') => {
     ];
 
   if ( role === 'ADMIN_ROLE' ) {
-            menu[1].submenu.unshift({  titulo: 'Cargar estudio', url: 'Cargar-estudio' }),
-            menu[1].submenu.unshift({  titulo: 'Cargar persona', url: 'Cargar-paciente' }),
-                  menu[1].submenu.unshift({ titulo: 'Mis estudios', url: 'estudios' })
+            menu[1].submenu.unshift({  titulo: 'Cargar paciente', url: 'Cargar-paciente' }),
+            menu[1].submenu.unshift({ titulo: 'Actualizar contraseña', url: 'claves' }),
+            menu[1].submenu.unshift({ titulo: 'Mis estudios', url: 'estudios' }),
+            menu[1].submenu.unshift({  titulo: 'Cargar estudio', url: 'Cargar-estudio' })
+
+
 
 
   }

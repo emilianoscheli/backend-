@@ -33,7 +33,11 @@ const EstudioSchema = Schema({
        
     },
   
-  
+    fecha: {
+        type: Date,
+        required: false,
+     
+    },
     fecha2: {
         type: String,
         required: false,

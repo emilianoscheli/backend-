@@ -11,11 +11,19 @@ const MedicoSchema = Schema({
     usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
-        required: true
+        required: false
     },
     hospital: {
         type: Schema.Types.ObjectId,
         ref: 'Hospital',
+        required: false
+    },
+    apellido: {
+        type: String,
+        required: true
+    },
+    dni: {
+        type: String,
         required: true
     },
     

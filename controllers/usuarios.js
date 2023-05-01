@@ -33,9 +33,9 @@ const getUsuarios = async(req, res) => {
 
     const [ usuarios, total ] = await Promise.all([
         Usuario
-            .find({}, 'nombre  role  img fecha2')
+            .find({}, 'nombre apellido dni password   ')
             .skip( desde )
-            .limit( 5 ),
+            .limit( 99 ),
 
         Usuario.countDocuments()
     ]);
@@ -72,10 +72,11 @@ const crearUsuario = async(req, res = response) => {
         console.log( 'pasoo' );
 
         // Encriptar contraseña
+        
         const salt = bcrypt.genSaltSync();
         usuario.password = bcrypt.hashSync( password, salt );
     
-    
+        
         // Guardar usuario
         await usuario.save();
 
@@ -161,6 +162,94 @@ const actualizarUsuario = async (req, res = response) => {
 
 }
 
+const updatePass = async (req, res = response) => {
+
+
+     // TODO: Validar token y comprobar si es el usuario correcto
+     /*/
+     const { password , dni} = req.body;
+     console.log('inside update password')
+ 
+ 
+     try {
+        const usuarioActualizado = await Usuario.findByIdAndUpdate(
+            65,
+          { password },
+          { new: true }
+        );
+        res.status(200).json(usuarioActualizado);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+
+
+
+*/
+
+
+    /* try {
+ 
+        const usuarioDB = await Usuario.findOne({ dni });
+ 
+         if ( !usuarioDB ) {
+             return res.status(404).json({
+                 ok: false,
+                 msg: 'No existe un usuario por ese id'
+             });
+         }
+ 
+   
+   
+ 
+         const usuarioActualizado = await Usuario.findByIdAndUpdate( dni, password, { new: true } );
+ 
+         res.json({
+             ok: true,
+             usuario: usuarioActualizado
+         });
+ 
+         
+     } catch (error) {
+         console.log(error);
+         res.status(500).json({
+             ok: false,
+             msg: 'Error inesperado'
+         })
+     }
+
+
+     */
+
+     const { id } = req.params;
+     
+ 
+   
+        const { dni } = req.params;
+        const { password } = req.params;
+        const obj =JSON.stringify(req.body);
+        console.log( 'im on tthe updateeee controler+++'+req.body );
+      
+        try {
+        const { dni } = req.params;
+              // Encriptar contraseña       // Hash the new password
+
+        
+        const salt = bcrypt.genSaltSync();
+        hashedPassword = bcrypt.hashSync( password, salt );
+     
+
+          const usuarioActualizado = await Usuario.findOneAndUpdate(
+            { dni },
+            {  password: hashedPassword  },
+            { new: true }
+          );
+          res.status(200).json(usuarioActualizado);
+        } catch (error) {
+          res.status(500).json({ error: error.message });
+        }
+   
+
+}
 
 const borrarUsuario = async(req, res = response ) => {
 
@@ -205,5 +294,6 @@ module.exports = {
     crearUsuario,
     actualizarUsuario,
     getSolicitante,
+    updatePass,
     borrarUsuario
 }

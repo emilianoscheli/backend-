@@ -5,7 +5,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-const { getEstudios, crearEstudio, actualizarEstudio, borrarEstudio, getEstudioByDni } = require('../controllers/estudios');
+const { getEstudios,getEstudioss, crearEstudio, actualizarEstudio, borrarEstudio, getEstudioByDni } = require('../controllers/estudios');
 const { 
     validarJWT, 
     varlidarADMIN_ROLE,
@@ -14,7 +14,7 @@ const {
 
 
 const router = Router();
-router.get( '/' , getEstudios );
+router.get( '/' , getEstudioss );
 //router.get('/coleccion/:tabla/:busqueda'
 
 //router.get( '/:dni' , getEstudios );
@@ -44,9 +44,10 @@ router.put( '/:id',
 );
 
 router.delete( '/:id',
-    [ validarJWT, varlidarADMIN_ROLE ],
+
     borrarEstudio
 );
+
 /*
 router.get( '/:dni',
  
