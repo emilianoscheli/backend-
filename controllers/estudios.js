@@ -99,7 +99,7 @@ const getEstudiosx2 = async(req, res) => {
         Estudio
             .find({dni2})
             .skip( desde )
-            .limit( 5),
+            .limit(50),
 
         Estudio.find({dni2}).countDocuments()
     ]);
@@ -382,8 +382,100 @@ const borrarEstudio = async(req, res = response ) => {
 
 
 
+const toggleButtonState = (req, res) => {
+
+    Estudio.findOne({})
+    .then(button => {
+        Estudio.state = !Estudio.state;
+      return button.save();
+    })
+    .then(button => res.send(button.state))
+    .catch(err => res.status(500).send(err));
+
+}
+
+
+const state = async(req, res= response) => {
+
+
+
+    console.log('state pree in');
+
+   /* 
+const uid=req.params.id;
+
+
+//const usuarioDB = await Estudio.findById( uid );
+
+    try {
+        console.log('state in');
+        const estudio = await Estudio.findById(objectId);
+        console.log('state out');
+
+    
+        if (!estudio) {
+          return res.status(404).json({ msg: 'Estudio no encontrado' });
+        }
+    
+        estudio.estado = !estudio.estado;
+    
+        await estudio.save();
+    
+        res.json(estudio);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error del servidor');
+      }
+*/
+//const id = '643d02afe74e2a4148907054';
+const id = req.params.id;
+
+const mongoose = require('mongoose');
+const objectId = mongoose.Types.ObjectId(id);
+const estadoss = true;
+
+
+
+try {
+
+    const stat = await Estudio.findById( id );
+
+    if ( !stat ) {
+        return res.status(404).json({
+            ok: false,
+            msg: 'No existe un estudio por ese id'
+        });
+    }
+
+    stat.estado = !stat.estado;
+    await stat.save();
+    
+    res.json({
+        ok: true,
+        stat
+    });
+
+} catch (error) {
+    
+    console.log(error);
+    res.status(500).json({
+        ok: false,
+        msg: 'Hable con el administrador'
+    });
+
+}
+
+
+
+}
+
+
+
+
 module.exports = {
     getEstudioByDni,
+     state,
+    toggleButtonState,
     getEstudios,
     crearEstudio,
     actualizarEstudio,

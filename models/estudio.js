@@ -6,6 +6,11 @@ const EstudioSchema = Schema({
         type: String,
         required: false
     },
+    estado: {
+        type: Boolean,
+        default: false,
+        required: false,
+      },
 
     nombreDni: {
         type: String,
@@ -54,6 +59,7 @@ const EstudioSchema = Schema({
     descripE: {
         type: String,
     },
+
     /*
 
     apellido: {

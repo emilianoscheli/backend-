@@ -5,7 +5,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-const { getEstudios,getEstudioss, crearEstudio, actualizarEstudio, borrarEstudio, getEstudioByDni } = require('../controllers/estudios');
+const {state, getButtonState, getEstudios,getEstudioss, crearEstudio, actualizarEstudio, borrarEstudio, getEstudioByDni } = require('../controllers/estudios');
 const { 
     validarJWT, 
     varlidarADMIN_ROLE,
@@ -47,6 +47,9 @@ router.delete( '/:id',
 
     borrarEstudio
 );
+router.post('/toggle/:id', state);
+
+//router.put('/toggle/:id', state);
 
 /*
 router.get( '/:dni',

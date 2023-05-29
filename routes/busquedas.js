@@ -7,7 +7,7 @@ const { validarJWT } = require('../middlewares/validar-jwt')
 
 const { getbyDni,getTodo,getDate, getDocumentosColeccion } = require('../controllers/busquedas');
 
-
+ 
 const router = Router();
 
 
