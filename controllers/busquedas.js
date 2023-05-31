@@ -71,13 +71,13 @@ const getbyDni = async(req, res = response ) => {
 
 
   console.log('dni look for+++'+dni)
+  let data = [];
 
-
-          const data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
+           data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
    
           res.json({
             ok: true, 
-           data
+          data
         })
         console.log('daata+++'+data)
 
