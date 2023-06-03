@@ -1,12 +1,10 @@
-require('dotenv').config();
-const path = require('path');
+ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
 
 const { dbConnection } = require('./database/config');
 
-var bodyParser = require('body-parser');
 // Crear el servidor de express
 const app = express();
 
@@ -19,8 +17,6 @@ app.use( express.json() );
 // Base de datos
 dbConnection();
 
-// Directorio público
-app.use( express.static('public') );
 
 // Rutas
 app.use( '/api/usuarios', require('./routes/usuarios') );
@@ -33,11 +29,6 @@ app.use( '/api/Estudios', require('./routes/Estudios') );
 app.use( '/api/Estudios2', require('./routes/Estudios2') );
 
 
-
-// Lo último
-app.get('*', (req, res) => {
-    res.sendFile( path.resolve( __dirname, 'public/index.html' ) );
-});
 
 
 app.listen( process.env.PORT, () => {
