@@ -11,7 +11,7 @@ const { getbyDni,getTodo,getDate, getDocumentosColeccion } = require('../control
 const router = Router();
 
 
-//router.get('/:fechaBuscada/:fechaBuscada2' , getDate );
+router.get('/:fechaBuscada/:fechaBuscada2' , getDate );
 router.get('/:dni' , getbyDni );
 
 

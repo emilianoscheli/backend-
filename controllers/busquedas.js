@@ -66,11 +66,10 @@ const getDocumentosColeccion = async(req, res = response ) => {
 
 const getbyDni = async(req, res = response ) => {
 
-  const tabla    = req.params.tabla;
   const dni = req.params.dni;
 
 
-  console.log('dni look for+++'+dni)
+  //console.log('dni look for+++'+dni)
   let data = [];
 
            data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
@@ -79,7 +78,7 @@ const getbyDni = async(req, res = response ) => {
             ok: true, 
           data
         })
-        console.log('daata+++'+data)
+       // console.log('daata+++'+data)
 
 }
 
