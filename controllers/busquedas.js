@@ -70,16 +70,21 @@ const getbyDni = async(req, res = response ) => {
 
 
   //console.log('dni look for+++'+dni)
-  let data = [];
 
-           data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
+          // data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
    
-          res.json({
-            ok: true, 
-          data
-        })
+      
        // console.log('daata+++'+data)
-
+       let data = [];
+       try {
+         data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] });
+       } catch (error) {
+         console.log(error);
+       }
+       res.json({
+        ok: true, 
+       data
+    })
 }
 
 const getDate = async(req, res = response ) => {
