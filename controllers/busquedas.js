@@ -66,7 +66,6 @@ const getDocumentosColeccion = async(req, res = response ) => {
 
 const getbyDni = async(req, res = response ) => {
 
-  const dni = req.params.dni;
 
 
   //console.log('dni look for+++'+dni)
@@ -75,12 +74,12 @@ const getbyDni = async(req, res = response ) => {
    
       
        // console.log('daata+++'+data)
-       let data = [];
+      
+      
+      
+      /* let data = [];
        try {
-                 data = await Estudio.find( {dni: dni});
-
-    
-         //data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] });
+         data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] });
        } catch (error) {
          console.log(error);
        }
@@ -88,6 +87,26 @@ const getbyDni = async(req, res = response ) => {
         ok: true, 
        data
     })
+
+
+
+    */
+
+    const desde = Number(req.query.desde) || 0;
+    const dni = req.params.dni;
+    //console.log('dni look for+++'+dni)
+    let data = [];
+  
+  
+             data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
+             data = await Estudio.find({$or: [ {dni: dni}, {dni2: dni} ] })
+  
+            res.json({
+              ok: true, 
+             data
+            
+          })
+          //console.log('daata+++'+data)
 }
 
 const getDate = async(req, res = response ) => {
@@ -97,11 +116,11 @@ const getDate = async(req, res = response ) => {
   
   const dnii= req.params.dni;
     // Define the start and end dates to search documents
-    const startDate = new Date('2023-04-14');
-    const endDate = new Date('2023-04-17');
-    console.log('get in Get date')
+    //const startDate = new Date('2023-04-14');
+    //const endDate = new Date('2023-04-17');
+    //console.log('get in Get date')
   
-    console.log('date one++++'+startDate2+'++date two++++'+endDate2)
+    //console.log('date one++++'+startDate2+'++date two++++'+endDate2)
     // Find all documents between the start and end dates
    // const data = await Estudio.find({  fecha: { $gte: startDate, $lt: endDate } })
    const data = await Estudio.find({ fecha: { $gte: startDate2, $lte: endDate2 } });
@@ -110,6 +129,8 @@ const getDate = async(req, res = response ) => {
       ok: true, 
      data
   })
+/*
+
     
     console.log('++++++++++data+++++++++');
   
@@ -117,7 +138,8 @@ const getDate = async(req, res = response ) => {
   
     console.log('++++++++++');
   console.log('dnii++++'+dnii);
-
+  
+*/
 //const startDate = new Date('2023-04-02T00:00:00.000+00:00');
 //const endDate = new Date('2023-04-02T00:00:00.000+00:00');
 /*

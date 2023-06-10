@@ -67,7 +67,7 @@ const getEstudioss = async(req, res) => {
         total
     });
 
-}
+} 
 const getEstudios = async(req, res) => {
 
     const desde = Number(req.query.desde) || 0;
